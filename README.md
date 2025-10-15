@@ -63,7 +63,7 @@ It supports multiple roles:
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone <https://github.com/thisismasud/foodlygenerativeui.git>
+git clone https://github.com/thisismasud/foodlygenerativeui.git
 cd foodly
 
 npm install
