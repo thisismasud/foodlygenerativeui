@@ -1,50 +1,135 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-model User {
-  id     Int     @id @default(autoincrement())
-  name   String
-  email  String  @unique
-  role   Role
-  store  Store?  @relation("UserStore")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())  
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_DIRECT_URL")
 }
 
+// ---------------------
+// Users (Admin, Store, Customer, Rider)
+// ---------------------
+model User {
+  id             String   @id @default(uuid())
+  name           String
+  email          String    @unique
+  role           Role
+  authId         String   @unique
+  password       String?   // required if using JWT/NextAuth
+  store          Store?    @relation("UserStore")
+  orders         Order[]   @relation("CustomerOrders") // only for Customers
+  deliveries     Order[]   @relation("RiderDeliveries") // only for Riders
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @default(now())
+}
+
+// ---------------------
+// Stores
+// ---------------------
 model Store {
-  id        Int     @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   name      String
   location  String?
-  ownerId   Int     @unique
-  owner     User    @relation("UserStore", fields: [ownerId], references: [id])
+  ownerId   String   @unique
+  owner     User     @relation("UserStore", fields: [ownerId], references: [id])
   foods     Food[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())  
-}
-
-model Food {
-  id        Int     @id @default(autoincrement())
-  name      String
-  price     Float
-  store     Store   @relation(fields: [storeId], references: [id])
-  storeId   Int
+  orders    Order[]  // orders for this store
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 }
+
+// ---------------------
+// Foods
+// ---------------------
+model Food {
+  id        Int      @id @default(autoincrement())
+  name      String
+  price     Float
+  storeId   Int
+  store     Store    @relation(fields: [storeId], references: [id])
+  orderItems OrderItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+// ---------------------
+// Orders
+// ---------------------
+model Order {
+  id           Int         @id @default(autoincrement())
+  customerId   String
+  customer     User        @relation("CustomerOrders", fields: [customerId], references: [id])
+  storeId      Int
+  store        Store       @relation(fields: [storeId], references: [id])
+  riderId      String?        
+  rider        User?       @relation("RiderDeliveries", fields: [riderId], references: [id])
+  items        OrderItem[]
+  status       OrderStatus @default(PENDING)
+  totalPrice   Float       @default(0)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @default(now())
+  deliveredAt  DateTime?
+
+  payment      Payment?    @relation("OrderPayment")
+}
+
+// ---------------------
+// Order Items (Food in an order)
+// ---------------------
+model OrderItem {
+  id        Int    @id @default(autoincrement())
+  orderId   Int
+  order     Order  @relation(fields: [orderId], references: [id])
+  foodId    Int
+  food      Food   @relation(fields: [foodId], references: [id])
+  quantity  Int    @default(1)
+  price     Float
+}
+
+// ---------------------
+// Payments
+// ---------------------
+model Payment {
+  id        Int       @id @default(autoincrement())
+  orderId   Int       @unique
+  order     Order     @relation("OrderPayment", fields: [orderId], references: [id])
+  method    PaymentMethod
+  amount    Float
+  status    PaymentStatus @default(PENDING)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now())
+}
+
+// ---------------------
+// Enums
+// ---------------------
 enum Role {
   ADMIN
   STORE
   CUSTOMER
   RIDER
+}
+
+enum OrderStatus {
+  PENDING
+  ACCEPTED
+  PREPARING
+  OUT_FOR_DELIVERY
+  DELIVERED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  CASH
+  CARD
+  ONLINE
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
 }
