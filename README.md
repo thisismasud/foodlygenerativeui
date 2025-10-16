@@ -25,8 +25,6 @@ It supports multiple roles:
 
 ## ✨ Features
 
-⚡ Fast, type-safe queries
-
 ### 👨‍💼 Admin Dashboard
 
 - Manage all stores, foods, riders, and customers.
@@ -69,4 +67,5 @@ cd foodly
 npm install
 # or
 yarn install
+
 ```
