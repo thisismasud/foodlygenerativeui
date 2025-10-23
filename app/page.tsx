@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import CallToAction from "@/components/home/CallToAction";
 import Faq from "@/components/home/Faq";
 import Header from "@/components/home/Header";
@@ -5,9 +6,9 @@ import Hero from "@/components/home/Hero";
 import Info from "@/components/home/Info";
 import Promo from "@/components/home/Promo";
 import HeroBanner from "@/public/images/hero-food-banner.png";
+import { WandSparkles } from "lucide-react";
 import Image from "next/image";
 import Testimonials from "./../components/home/Testimonials";
-import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -23,7 +24,7 @@ export default function Home() {
           placeholder="blur"
           quality={90}
           sizes="100vw"
-          className="object-cover object-[40%_50%] sm:object-top"
+          className="object-cover object-[30%_42%] sm:object-[20%_25%]"
         />
 
         {/* 🔹 Dark transparent overlay */}
@@ -35,18 +36,25 @@ export default function Home() {
         </div> */}
 
         {/* 🔹 Navbar below announcement */}
-        <div className="absolute top-[1rem] sm:top-[1.5rem] left-0 w-full z-30 px-3 sm:px-6 sm:py-3 py-2">
+        <div className="absolute top-4 sm:top-9 left-4 right-3 sm:left-10 sm:right-8">
           <Header />
         </div>
 
         {/* 🔹 Hero content centered */}
-        <div className="relative flex flex-col top-[41%] md:top-[36%] h-full text-white text-center px-4 max-w-7xl mx-auto">
+        <div className="absolute top-[35%] sm:top-[34%] left-[50%] translate-x-[-50%] bg-white py-1 px-2 rounded-full flex flex-row gap-2 items-center justify-center text-zinc-800 text-xs">
+          <WandSparkles size={14} className="text-orange-800" />
+          <span>WITH THE POWER OF AI</span>
+        </div>
+
+        <div className="relative flex flex-col top-[40%] md:top-[40%] h-full text-white text-center px-4 max-w-7xl mx-auto">
           <Hero />
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-4">
-        <Info />
+      <section className=" bg-zinc-100/80 dark:bg-zinc-900/50">
+        <div className="max-w-7xl mx-auto px-4">
+          <Info />
+        </div>
       </section>
 
       {/* promo */}
@@ -66,7 +74,7 @@ export default function Home() {
         <Faq />
       </section>
 
-      <Footer/>
+      <Footer />
     </div>
   );
 }
