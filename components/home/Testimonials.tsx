@@ -49,8 +49,9 @@ const Testimonials = () => {
         />
         <div className="flex flex-col">
           <div className="flex items-center gap-1 font-normal">
-            <p className="text-[13px] sm:text-[14px] text-orange-700 dark:text-orange-400">{card.name}</p>
-            
+            <p className="text-[13px] sm:text-[14px] text-orange-700 dark:text-orange-400">
+              {card.name}
+            </p>
           </div>
           <span className="text-xs font-normal text-slate-500 dark:text-zinc-200">
             {card.handle}
@@ -103,7 +104,7 @@ const Testimonials = () => {
                 animation-direction: reverse;
             }
         `}</style>
-      <div className="flex items-center mr-auto gap-2 text-white bg-orange-500 rounded-full px-3 py-1 w-fit ml-5">
+      <div className="flex justify-center items-center mr-auto text-orange-500 rounded-full px-3 py-1 ml-5">
         <svg
           width="13"
           height="14"
@@ -113,19 +114,21 @@ const Testimonials = () => {
         >
           <path
             d="M1.613 8.2a.62.62 0 0 1-.553-.341.59.59 0 0 1 .076-.637l6.048-6.118a.31.31 0 0 1 .375-.069c.061.033.11.084.137.147a.3.3 0 0 1 .014.197L6.537 4.991a.59.59 0 0 0 .07.552.61.61 0 0 0 .504.257h4.276a.62.62 0 0 1 .553.341.59.59 0 0 1-.076.637l-6.048 6.119a.31.31 0 0 1-.375.067.295.295 0 0 1-.15-.344l1.172-3.61a.59.59 0 0 0-.07-.553.61.61 0 0 0-.504-.257z"
-            stroke="#ffffff"
+            stroke="#ce7e00"
             strokeMiterlimit="5.759"
             strokeLinecap="round"
           />
         </svg>
-        <span>Testimonials</span>
+        <div className="text-center ">Testimonials</div>
       </div>
       <h1
-        className={`${poppins.className} text-2xl sm:text-3xl bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400 text-transparent bg-clip-text mt-4 ml-5 font-semibold`}
+        className={`${poppins.className} text-center text-2xl sm:text-3xl bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-400 text-transparent bg-clip-text mt-2 ml-5 font-semibold`}
       >
         Don't just take our words
       </h1>
-      <p className="text-zinc-600 dark:text-zinc-300 mt-4 max-w-2xl ml-5 sm:text-sm text-xs pr-4">
+      <p
+        className={`${poppins.className} text-slate-600 text-center dark:text-zinc-300 mt-4 ml-5 sm:text-sm text-xs pr-4`}
+      >
         Hear what our users say about us. We're always looking for ways to
         improve. If you have a positive experience with us, leave a review.
       </p>

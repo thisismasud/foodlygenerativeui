@@ -8,7 +8,7 @@ import Link from "next/link";
 
 export default function Info() {
   return (
-    <div className="flex md:flex-row flex-col my-24 justify-center gap-10 md:gap-7 items-center">
+    <div className="flex md:flex-row flex-col py-16 justify-center gap-10 md:gap-7 items-center ">
       <div className="flex flex-row sm:flex-col sm:items-center items-start justify-center py-2 lg:px-15 px-3">
         <Image
           src={DeliverMan}
