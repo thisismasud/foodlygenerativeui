@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function SignUp() {
   return (
     <section className="h-screen flex justify-center items-center">
-      <div className="shadow-[0px_0px_10px_0px] shadow-black/10 max-w-96 rounded-xl bg-transparent dark:bg-zinc-900/80 border border-gray-100 dark:border-zinc-800/70 p-4 mx-2">
+      <div className="shadow-[0px_0px_10px_0px] shadow-black/10 max-w-[27rem] w-full rounded-xl bg-transparent dark:bg-zinc-900/80 border border-gray-100 dark:border-zinc-800/70 p-4 mx-2">
         <div className="flex justify-center items-center">
           <Logo />
         </div>
@@ -45,15 +45,24 @@ export default function SignUp() {
               className="py-2 w-full rounded border bg-transparent px-2 text-center text-gray-500 placeholder-[#7f8c8d] focus:ring-1 focus:ring-orange-500 focus:outline-none border-gray-500/30"
             />
           </div>
-          <div className="mb-2 text-right">
-            <Link
-              href="#"
-              className="text-sm text-indigo-700 dark:text-gray-400 hover:text-indigo-400"
+
+          <div className="mb-4">
+            <label
+              htmlFor="confirmPassword"
+              className="mb-1 block text-sm text-gray-700 dark:text-gray-400"
             >
-              Forgot Password?
-            </Link>
+              Confirm Password
+            </label>
+            <input
+              type="confirmPassword"
+              id="confirmPassword"
+              placeholder="Confirm Password"
+              autoComplete="new-password"
+              className="py-2 w-full rounded border bg-transparent px-2 text-center text-gray-500 placeholder-[#7f8c8d] focus:ring-1 focus:ring-orange-500 focus:outline-none border-gray-500/30"
+            />
           </div>
-          <button className="py-2 font-medium w-full rounded bg-orange-600 text-white transition-colors duration-300 hover:bg-orange-700 cursor-pointer">
+          
+          <button className="py-2 mt-2 font-medium w-full rounded bg-orange-600 text-white transition-colors duration-300 hover:bg-orange-700 cursor-pointer">
             Create account
           </button>
         </form>

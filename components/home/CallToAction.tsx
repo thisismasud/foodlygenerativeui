@@ -10,11 +10,11 @@ export default function CallToAction() {
       }}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black/65"></div>
+      <div className="absolute inset-0 bg-black/70"></div>
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center px-5">
-        <h1 className={`${poppins.className} text-2xl md:text-3xl font-medium text-white max-w-2xl`}>
+        <h1 className={`${poppins.className} text-2xl md:text-4xl font-medium text-white max-w-4xl`}>
           Satisfy Your Cravings with Fast, Fresh, and Reliable Delivery
         </h1>
         <div className="h-[3px] w-32 my-2 bg-gradient-to-l from-transparent to-zinc-600"></div>

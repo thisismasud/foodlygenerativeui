@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <section className="flex flex-col justify-center items-center">
       <h1
-        className={`${poppins.className} font-normal text-[2.8rem] leading-13 lg:leading-15 md:text-[3.2rem] lg:text-[3.5rem] max-w-3xl mx-auto px-4`}
+        className={`${poppins.className} font-normal text-[3rem] leading-14 lg:leading-17 md:text-[3.5rem] lg:text-[4rem] max-w-3xl mx-auto px-4`}
       >
         Get{" "}
         <strong className="font-medium bg-gradient-to-r from-orange-500 to-orange-200 text-transparent bg-clip-text">

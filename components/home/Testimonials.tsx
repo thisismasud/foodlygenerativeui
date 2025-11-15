@@ -37,7 +37,7 @@ const Testimonials = () => {
     },
   ];
 
-  const CreateCard = ({ card }) => (
+  const CreateCard = ({ card}:{ card: any }) => (
     <div
       className={`${poppins.className} p-4 rounded-lg mx-4 shadow-orange-400 dark:shadow-orange-500 hover:shadow-lg transition-all duration-200 w-72 shrink-0`}
     >
