@@ -19,7 +19,7 @@ It supports multiple roles:
 | **Authentication**     | (Planned) NextAuth.js / Custom JWT                                           |
 | **Language**           | TypeScript                                                                   |
 | **Styling**            | Tailwind (Dark + Light mode supported)                                       |
-| **AI / Generative UI** | Generative UI SDK (Hashbrown / Vercel AI SDK/ Gemini)                        |
+| **AI / Generative UI** | Generative UI SDK (Hashbrown / Vercel AI SDK with Gemini)                        |
 
 ---
 

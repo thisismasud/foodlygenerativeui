@@ -73,7 +73,7 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-5 sm:px-10 my-24">
         <Faq />
       </section>
-
+      <div className="absolute top-[80vh] h-44 w-44 bg-gradient-to-r from-pink-600 to-indigo-400 rotate-90 rounded-full blur-[180px] "></div>
       <Footer />
     </div>
   );
