@@ -8,105 +8,82 @@ datasource db {
   directUrl = env("DATABASE_DIRECT_URL")
 }
 
-// ---------------------
-// Users (Admin, Store, Customer, Rider)
-// ---------------------
 model User {
-  id             String   @id @default(uuid())
-  name           String
-  email          String    @unique
-  role           Role
-  authId         String   @unique
-  password       String?   // required if using JWT/NextAuth
-  store          Store?    @relation("UserStore")
-  orders         Order[]   @relation("CustomerOrders") // only for Customers
-  deliveries     Order[]   @relation("RiderDeliveries") // only for Riders
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @default(now())
+  id         String   @id @default(uuid())
+  name       String
+  email      String   @unique
+  role       Role
+  authId     String?  @unique
+  password   String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now())
+  orders     Order[]  @relation("CustomerOrders")
+  deliveries Order[]  @relation("RiderDeliveries")
+  store      Store?   @relation("UserStore")
 }
 
-// ---------------------
-// Stores
-// ---------------------
 model Store {
   id        Int      @id @default(autoincrement())
   name      String
   location  String?
   ownerId   String   @unique
-  owner     User     @relation("UserStore", fields: [ownerId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
   foods     Food[]
-  orders    Order[]  // orders for this store
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  orders    Order[]
+  owner     User     @relation("UserStore", fields: [ownerId], references: [id])
 }
 
-// ---------------------
-// Foods
-// ---------------------
 model Food {
-  id        Int      @id @default(autoincrement())
-  name      String
-  price     Float
-  storeId   Int
-  store     Store    @relation(fields: [storeId], references: [id])
+  id         Int         @id @default(autoincrement())
+  name       String
+  price      Float
+  storeId    Int
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @default(now())
+  image      String?
+  store      Store       @relation(fields: [storeId], references: [id])
   orderItems OrderItem[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-  image     String?
 }
 
-// ---------------------
-// Orders
-// ---------------------
 model Order {
-  id           Int         @id @default(autoincrement())
-  customerId   String
-  customer     User        @relation("CustomerOrders", fields: [customerId], references: [id])
-  storeId      Int
-  store        Store       @relation(fields: [storeId], references: [id])
-  riderId      String?        
-  rider        User?       @relation("RiderDeliveries", fields: [riderId], references: [id])
-  items        OrderItem[]
-  status       OrderStatus @default(PENDING)
-  totalPrice   Float       @default(0)
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @default(now())
-  deliveredAt  DateTime?
-
-  payment      Payment?    @relation("OrderPayment")
+  id          Int         @id @default(autoincrement())
+  customerId  String
+  storeId     Int
+  riderId     String?
+  status      OrderStatus @default(PENDING)
+  totalPrice  Float       @default(0)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @default(now())
+  deliveredAt DateTime?
+  customer    User        @relation("CustomerOrders", fields: [customerId], references: [id])
+  rider       User?       @relation("RiderDeliveries", fields: [riderId], references: [id])
+  store       Store       @relation(fields: [storeId], references: [id])
+  items       OrderItem[]
+  payment     Payment?    @relation("OrderPayment")
 }
 
-// ---------------------
-// Order Items (Food in an order)
-// ---------------------
 model OrderItem {
-  id        Int    @id @default(autoincrement())
-  orderId   Int
-  order     Order  @relation(fields: [orderId], references: [id])
-  foodId    Int
-  food      Food   @relation(fields: [foodId], references: [id])
-  quantity  Int    @default(1)
-  price     Float
+  id       Int   @id @default(autoincrement())
+  orderId  Int
+  foodId   Int
+  quantity Int   @default(1)
+  price    Float
+  food     Food  @relation(fields: [foodId], references: [id])
+  order    Order @relation(fields: [orderId], references: [id])
 }
 
-// ---------------------
-// Payments
-// ---------------------
 model Payment {
-  id        Int       @id @default(autoincrement())
-  orderId   Int       @unique
-  order     Order     @relation("OrderPayment", fields: [orderId], references: [id])
+  id        Int           @id @default(autoincrement())
+  orderId   Int           @unique
   method    PaymentMethod
   amount    Float
   status    PaymentStatus @default(PENDING)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @default(now())
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @default(now())
+  order     Order         @relation("OrderPayment", fields: [orderId], references: [id])
 }
 
-// ---------------------
-// Enums
-// ---------------------
 enum Role {
   ADMIN
   STORE
