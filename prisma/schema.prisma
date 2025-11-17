@@ -12,6 +12,7 @@ model User {
   id         String   @id @default(uuid())
   name       String
   email      String   @unique
+  avatar     String?
   role       Role
   authId     String?  @unique
   password   String?
@@ -20,6 +21,7 @@ model User {
   orders     Order[]  @relation("CustomerOrders")
   deliveries Order[]  @relation("RiderDeliveries")
   store      Store?   @relation("UserStore")
+  refreshTokens RefreshToken[]
 }
 
 model Store {
@@ -82,6 +84,15 @@ model Payment {
   createdAt DateTime      @default(now())
   updatedAt DateTime      @default(now())
   order     Order         @relation("OrderPayment", fields: [orderId], references: [id])
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  expiresAt DateTime
+  createdAt DateTime @default(now())
 }
 
 enum Role {
