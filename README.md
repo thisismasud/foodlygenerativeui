@@ -14,7 +14,7 @@ It supports multiple roles:
 | ---------------------- | ---------------------------------------------------------------------------- |
 | **Frontend**           | [Next.js 15](https://nextjs.org) (App Router)                                |
 | **UI Library**         | [Tailwind CSS](https://tailwindcss.com) + [ShadCN/UI](https://ui.shadcn.com) |
-| **ORM**                | [Prisma](https://www.prisma.io)                                              |
+| **ORM**                | [Prisma](https://www.prisma.io)                    a                          |
 | **Database**           | [Supabase (PostgreSQL)](https://supabase.com)                                |
 | **Authentication**     | (Planned) NextAuth.js / Custom JWT                                           |
 | **Language**           | TypeScript                                                                   |

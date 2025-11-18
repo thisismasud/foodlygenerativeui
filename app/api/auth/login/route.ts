@@ -1,9 +1,12 @@
 import prisma from "@/lib/prisma";
+import { generateRefreshToken } from "@/utils/generateRefreshToken";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 
 const JWT_SECRET = process.env.JWT_SECRET;
+const REFRESH_TOKEN_EXPIRES = process.env.REFRESH_TOKEN_EXPIRES || "7d"
+
 
 export async function POST(req: Request) {
   try {
@@ -49,12 +52,27 @@ export async function POST(req: Request) {
       role: user.role,
     };
 
-    //generate jwt
-    const token = jwt.sign(userObject, JWT_SECRET, {
-      expiresIn: process.env.JWT_EXPIRES,
+    //generate access
+    const accessToken = jwt.sign(userObject, JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRES, //1h
     });
 
-    return NextResponse.json({
+    //refresh toekn
+    const refreshToken = generateRefreshToken()
+
+    const expiresAt = new Date();
+    expiresAt.setDate(expiresAt.getDate() + parseInt(REFRESH_TOKEN_EXPIRES.replace('d', '')));
+
+
+    await prisma.refreshToken.create({
+        data:{
+            token: refreshToken,
+            userId: user.id,
+            expiresAt: expiresAt
+        }
+    })
+
+    const response = NextResponse.json({
       message: "Login successful",
       user: {
         id: user.id,
@@ -62,10 +80,19 @@ export async function POST(req: Request) {
         email: user.email,
         role: user.role,
       },
-      token,
+      accessToken,
     });
+
+    response.cookies.set('refreshToken', refreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 7 * 24 * 60 * 60,
+        sameSite: "strict"
+    })
+    return response
+
   } catch (error) {
     console.error("Login error", error);
-    NextResponse.json({ error: "Authorization error" }, { status: 500 });
+    return NextResponse.json({ error: "Authorization error" }, { status: 500 });
   }
 }
