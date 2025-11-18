@@ -1,5 +1,5 @@
+import jwt from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
-import jwt from 'jsonwebtoken'
 
 const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_EXPIRES = process.env.JWT_EXPIRES || "15m";
@@ -32,18 +32,25 @@ export async function POST(req: NextRequest) {
 
     //if token is valid, generate new access token
     const newAccessTokenPayload = {
-        id: storedToken.user.id,
-        email: storedToken.user.email,
-        role: storedToken.user.role
-    }
+      id: storedToken.user.id,
+      email: storedToken.user.email,
+      role: storedToken.user.role,
+    };
 
     const newAccessToken = jwt.sign(newAccessTokenPayload, JWT_SECRET, {
-        expiresIn: JWT_EXPIRES
-    })
+      expiresIn: JWT_EXPIRES,
+    });
 
-    
-
-    
+    const response = NextResponse.json({
+      message: "Access token refreshed successfully",
+      user: {
+        id: storedToken.user.id,
+        email: storedToken.user.email,
+        role: storedToken.user.role,
+      },
+      token: newAccessToken,
+    });
+    return response;
   } catch (error) {
     console.error("Refresh token generation error:", error);
     return NextResponse.json(
