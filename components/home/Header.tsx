@@ -1,5 +1,4 @@
-import { WandSparkles } from "lucide-react";
-import Logo from "../Logo";
+import Logo from "../common/Logo";
 import Navbar from "../Navbar";
 import ThemeToggle from "../ui/ThemeToggle";
 
@@ -12,7 +11,6 @@ export default function Header() {
         <Navbar />
         <ThemeToggle />
       </div>
-      
     </div>
   );
 }

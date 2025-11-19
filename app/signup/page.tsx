@@ -1,11 +1,11 @@
-import Logo from "@/components/Logo";
+import Logo from "@/components/common/Logo";
+import SignUpForm from "@/components/register/SignUpForm";
 import { poppins } from "@/lib/fonts";
-import Link from "next/link";
 
 export default function SignUp() {
   return (
-    <section className="h-screen flex justify-center items-center">
-      <div className="shadow-[0px_0px_10px_0px] shadow-black/10 max-w-[27rem] w-full rounded-xl bg-transparent dark:bg-zinc-900/80 border border-gray-100 dark:border-zinc-800/70 p-4 mx-2">
+    <section className="min-h-screen flex justify-center items-center py-5">
+      <div className="shadow-[0px_0px_10px_0px] shadow-black/10 max-w-108 w-full rounded-xl bg-transparent dark:bg-zinc-900/80 border border-gray-100 dark:border-zinc-800/70 p-4 mx-2">
         <div className="flex justify-center items-center">
           <Logo />
         </div>
@@ -14,58 +14,8 @@ export default function SignUp() {
         >
           Create new account
         </h1>
-        <form>
-          <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="mb-1 block text-sm text-gray-700 dark:text-gray-400"
-            >
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              placeholder="name@example.com"
-              autoComplete="email"
-              className="py-2 w-full rounded border  bg-transparent px-2 text-center text-gray-500  placeholder-[#7f8c8d] focus:ring-1 focus:ring-orange-500 focus:outline-none border-gray-500/30"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="password"
-              className="mb-1 block text-sm text-gray-700 dark:text-gray-400"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Password"
-              autoComplete="new-password"
-              className="py-2 w-full rounded border bg-transparent px-2 text-center text-gray-500 placeholder-[#7f8c8d] focus:ring-1 focus:ring-orange-500 focus:outline-none border-gray-500/30"
-            />
-          </div>
 
-          <div className="mb-4">
-            <label
-              htmlFor="confirmPassword"
-              className="mb-1 block text-sm text-gray-700 dark:text-gray-400"
-            >
-              Confirm Password
-            </label>
-            <input
-              type="confirmPassword"
-              id="confirmPassword"
-              placeholder="Confirm Password"
-              autoComplete="new-password"
-              className="py-2 w-full rounded border bg-transparent px-2 text-center text-gray-500 placeholder-[#7f8c8d] focus:ring-1 focus:ring-orange-500 focus:outline-none border-gray-500/30"
-            />
-          </div>
-          
-          <button className="py-2 mt-2 font-medium w-full rounded bg-orange-600 text-white transition-colors duration-300 hover:bg-orange-700 cursor-pointer">
-            Create account
-          </button>
-        </form>
+        <SignUpForm />
 
         <div className="relative my-8 text-center">
           <span className="relative z-10 bg-white dark:bg-zinc-900/80 px-3 text-gray-400 ">

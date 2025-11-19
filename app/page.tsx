@@ -1,4 +1,4 @@
-import Footer from "@/components/Footer";
+
 import CallToAction from "@/components/home/CallToAction";
 import Faq from "@/components/home/Faq";
 import Header from "@/components/home/Header";
@@ -9,6 +9,7 @@ import HeroBanner from "@/public/images/hero-food-banner.png";
 import { WandSparkles } from "lucide-react";
 import Image from "next/image";
 import Testimonials from "./../components/home/Testimonials";
+import Footer from "@/components/common/Footer";
 
 export default function Home() {
   return (
@@ -73,7 +74,7 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-5 sm:px-10 my-24">
         <Faq />
       </section>
-      <div className="absolute top-[80vh] h-44 w-44 bg-gradient-to-r from-pink-600 to-indigo-400 rotate-90 rounded-full blur-[180px] "></div>
+      <div className="absolute top-[80vh] h-44 w-44 bg-linear-to-r from-pink-600 to-indigo-400 rotate-90 rounded-full blur-[180px] "></div>
       <Footer />
     </div>
   );
