@@ -8,7 +8,7 @@ const Field = ({label, children, htmlFor, error}:FieldProps) => {
     <div className='form-control mb-4'>
        {label && <label className='mb-1 block text-sm text-gray-700 dark:text-gray-400' htmlFor={id}>{label}</label>}
        {children}
-       {!!error && <div role='alert' className='text-red-500'>{error.message}</div>}
+       {!!error && <div role='alert' className='text-red-500 text-[13px]'>{error.message}</div>}
     </div>
   )
 }
