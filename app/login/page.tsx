@@ -1,4 +1,4 @@
-import Logo from "@/components/Logo";
+import Logo from "@/components/common/Logo";
 import { poppins } from "@/lib/fonts";
 import Link from "next/link";
 export default function LoginPage() {
@@ -43,7 +43,10 @@ export default function LoginPage() {
         </form>
         <p className="text-center mt-4 text-zinc-700 dark:text-zinc-400">
           Don’t have an account?{" "}
-          <Link href="/signup" className="text-zinc-700 dark:text-zinc-300 underline">
+          <Link
+            href="/signup"
+            className="text-zinc-700 dark:text-zinc-300 underline"
+          >
             Signup
           </Link>
         </p>

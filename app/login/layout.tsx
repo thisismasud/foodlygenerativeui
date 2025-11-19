@@ -1,4 +1,3 @@
-import Logo from "@/components/Logo";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -12,9 +11,5 @@ export default function LoginLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div>
-      {children}
-    </div>
-  );
+  return <div>{children}</div>;
 }
