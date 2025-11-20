@@ -4,7 +4,7 @@ import { RegisterInputs } from "@/types/types";
 import showToast from "@/utils/showToast";
 import { useForm } from "react-hook-form";
 import { Toaster } from "react-hot-toast";
-import Field from "../common/Field"
+import Field from "@/components/common/Field";
 import { useRouter } from "next/navigation";
 
 const SignUpForm = () => {

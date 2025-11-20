@@ -5,7 +5,7 @@ import showToast from "@/utils/showToast";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { Toaster } from "react-hot-toast";
-import Field from "../common/Field";
+import Field from "@/components/common/Field";
 
 const LoginForm = () => {
   const router = useRouter();

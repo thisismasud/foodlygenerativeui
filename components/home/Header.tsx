@@ -1,5 +1,5 @@
 import Logo from "../common/Logo";
-import Navbar from "../Navbar";
+import Navbar from "../common/Navbar";
 import ThemeToggle from "../ui/ThemeToggle";
 
 export default function Header() {

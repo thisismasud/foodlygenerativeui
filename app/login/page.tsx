@@ -1,6 +1,6 @@
 import Logo from "@/components/common/Logo";
-import LoginForm from "@/components/login/LoginForm";
-import SignInWithGoogle from "@/components/register/SignInWithGoogle";
+import LoginForm from "@/components/auth/login/LoginForm";
+import SignInWithGoogle from "@/components/auth/register/SignInWithGoogle";
 import { poppins } from "@/lib/fonts";
 import Link from "next/link";
 export default function LoginPage() {

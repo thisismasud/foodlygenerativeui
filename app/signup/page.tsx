@@ -1,6 +1,6 @@
 import Logo from "@/components/common/Logo";
-import SignInWithGoogle from "@/components/register/SignInWithGoogle";
-import SignUpForm from "@/components/register/SignUpForm";
+import SignInWithGoogle from "@/components/auth/register/SignInWithGoogle";
+import SignUpForm from "@/components/auth/register/SignUpForm";
 import { poppins } from "@/lib/fonts";
 
 export default function SignUp() {
