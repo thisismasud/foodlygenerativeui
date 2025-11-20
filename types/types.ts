@@ -16,10 +16,21 @@ export type userObject = {
    id: string,
    name: string,
    email: string,
-   role: string
+   role: string,
+   avatar?: string
 }
 
 export interface RegisterUserResponse {
     message: string,
     user: userObject
+}
+export interface LoginUserResponse {
+    message: string,
+    user: userObject,
+    accessToken: string
+}
+
+export interface LoginInputs {
+    email: string,
+    password: string
 }
