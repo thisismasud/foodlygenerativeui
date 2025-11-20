@@ -1,8 +1,9 @@
+// src/lib/supabase-server.ts
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
-export const createClient = async () => {
-  const cookieStore = await cookies(); // ✅ await it!
+export const createServerSupabase = async () => {
+  const cookieStore = await cookies();
 
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -21,7 +22,7 @@ export const createClient = async () => {
               cookieStore.set(name, value, options)
             );
           } catch {
-            // Called from a Server Component — safe to ignore
+            // ignore when called from server components that can't set cookies
           }
         },
       },
