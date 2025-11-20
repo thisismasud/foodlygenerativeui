@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase";
-import { RegisterInputs, RegisterUserResponse } from "@/types/types";
+import { LoginInputs, LoginUserResponse, RegisterInputs, RegisterUserResponse } from "@/types/types";
 import api from "./http";
 
 export const signupUser = async (
@@ -8,6 +8,12 @@ export const signupUser = async (
   const response = await api.post<RegisterUserResponse>("/auth/register", data);
   return response.data;
 };
+
+export const loginUser = async(data:LoginInputs):Promise<LoginUserResponse> =>{
+    const response = await api.post<LoginUserResponse>("/auth/login", data)
+    return response.data;
+}
+
 export async function signInWithGoogle() {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "google",
