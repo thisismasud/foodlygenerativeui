@@ -1,4 +1,4 @@
-
+import Footer from "@/components/common/Footer";
 import CallToAction from "@/components/home/CallToAction";
 import Faq from "@/components/home/Faq";
 import Header from "@/components/home/Header";
@@ -9,7 +9,6 @@ import HeroBanner from "@/public/images/hero-food-banner.png";
 import { WandSparkles } from "lucide-react";
 import Image from "next/image";
 import Testimonials from "./../components/home/Testimonials";
-import Footer from "@/components/common/Footer";
 
 export default function Home() {
   return (
