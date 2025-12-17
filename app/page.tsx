@@ -22,7 +22,6 @@ export default function Home() {
           fill
           priority
           placeholder="blur"
-          quality={90}
           sizes="100vw"
           className="object-cover object-[30%_42%] sm:object-[20%_25%]"
         />
