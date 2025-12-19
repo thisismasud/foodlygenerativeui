@@ -5,12 +5,13 @@ import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 
 const JWT_SECRET = process.env.JWT_SECRET;
-const REFRESH_TOKEN_EXPIRES = process.env.REFRESH_TOKEN_EXPIRES || "7d"
-
+const REFRESH_TOKEN_EXPIRES = process.env.REFRESH_TOKEN_EXPIRES || "7d";
 
 export async function POST(req: Request) {
   try {
     const { email, password } = await req.json();
+
+    console.log(email, password);
 
     //input validation
     if (!email || !password) {
@@ -29,7 +30,7 @@ export async function POST(req: Request) {
         password: true,
         email: true,
         role: true,
-        avatar: true
+        avatar: true,
       },
     });
     if (!user || !user.password) {
@@ -51,7 +52,7 @@ export async function POST(req: Request) {
       id: user.id,
       email: user.email,
       role: user.role,
-      avatar: user.avatar
+      avatar: user.avatar,
     };
 
     //generate access
@@ -60,19 +61,20 @@ export async function POST(req: Request) {
     });
 
     //refresh toekn
-    const refreshToken = generateRefreshToken()
+    const refreshToken = generateRefreshToken();
 
     const expiresAt = new Date();
-    expiresAt.setDate(expiresAt.getDate() + parseInt(REFRESH_TOKEN_EXPIRES.replace('d', '')));
-
+    expiresAt.setDate(
+      expiresAt.getDate() + parseInt(REFRESH_TOKEN_EXPIRES.replace("d", ""))
+    );
 
     await prisma.refreshToken.create({
-        data:{
-            token: refreshToken,
-            userId: user.id,
-            expiresAt: expiresAt
-        }
-    })
+      data: {
+        token: refreshToken,
+        userId: user.id,
+        expiresAt: expiresAt,
+      },
+    });
 
     const response = NextResponse.json({
       message: "Login successful",
@@ -81,19 +83,18 @@ export async function POST(req: Request) {
         name: user.name,
         email: user.email,
         role: user.role,
-        avatar: user.avatar
+        avatar: user.avatar,
       },
       accessToken,
     });
 
-    response.cookies.set('refreshToken', refreshToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        maxAge: 7 * 24 * 60 * 60,
-        sameSite: "strict"
-    })
-    return response
-
+    response.cookies.set("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 7 * 24 * 60 * 60,
+      sameSite: "strict",
+    });
+    return response;
   } catch (error) {
     console.error("Login error", error);
     return NextResponse.json({ error: "Authorization error" }, { status: 500 });
