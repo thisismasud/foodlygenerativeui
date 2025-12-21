@@ -1,4 +1,4 @@
-import { updateSession } from "@/lib/supabase/proxy";
+import { updateSession } from "./lib/supabase/proxy";
 import { type NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
@@ -15,7 +15,6 @@ export async function proxy(request: NextRequest) {
     const pathname = request.nextUrl.pathname;
     if (PUBLIC_PATHS.includes(pathname)) {
     // If the path is a public page, skip the session update logic.
-    // This allows the page to load without interference.
     return NextResponse.next(); 
   }
 
