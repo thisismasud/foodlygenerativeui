@@ -1,7 +1,7 @@
 "use client";
 
 import { Spinner } from "@/components/ui/spinner"; // Shadcn Spinner
-import { supabase } from "@/lib/supabase";
+import { supabase } from "@/lib/supabase/supabase";
 import { syncPrisma } from "@/services/authService";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
